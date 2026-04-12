@@ -15,7 +15,7 @@ Follow the step-by-step instructions below to run the model:
 
 Download the required dataset from the link below and extract it to the root directory of this project (same level as `physical_cond_diffusion.py`):
 
-Dataset Download Link: `xxx`
+Dataset Download Link: `https://huggingface.co/datasets/luckycheery/metallic_electromagnetic_field_mapping/tree/main`
 
 *Note: Ensure the dataset structure matches the expected format in the code.*
 
