@@ -1,0 +1,49 @@
+# physical_cond_diffusion
+
+A physical condition diffusion model implementation for electromagnetic imaging or related tasks.
+
+## Prerequisites
+
+- Python 3.7+
+- Git (for cloning the repository, optional)
+
+## Quick Start
+
+Follow the step-by-step instructions below to run the model:
+
+### Step 1: Download the Dataset
+
+Download the required dataset from the link below and extract it to the root directory of this project (same level as `physical_cond_diffusion.py`):
+
+Dataset Download Link: `xxx`
+
+*Note: Ensure the dataset structure matches the expected format in the code.*
+
+### Step 2: Install Dependencies
+
+Install all required packages from `requirements.txt` using pip:
+
+```bash
+pip install -r requirements.txt
+```
+
+If you encounter version conflicts, you can try upgrading pip first:
+
+```bash
+pip install --upgrade pip
+```
+
+### Step 3: Run the Model
+
+After completing the above steps, run the main script to start the model:
+
+```bash
+python physical_cond_diffusion.py
+```
+
+## Notes
+
+- Make sure the dataset path is correctly set in the code if it differs from the default.
+- The training process may take a long time depending on your hardware configuration.
+- If you encounter runtime errors, check if all dependencies are installed correctly and the dataset is properly downloaded.
+- The process files generated during the running are stored in the `generation_steps` directory. The final results are saved in `output_images` and `output_3d_images` directories.

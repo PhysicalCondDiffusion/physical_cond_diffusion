@@ -1,0 +1,15 @@
+diffusers~=0.30.3
+gym==0.26.2
+matplotlib==3.7.5
+numpy==1.24.3
+pandas==2.0.3
+Pillow==10.4.0
+robotframework==7.0.1
+scipy==1.10.1
+seaborn==0.13.2
+stable_baselines3==2.3.2
+torch==2.3.1
+torchvision~=0.18.1
+tqdm==4.66.4
+pyvista~=0.44.2
+torchmetrics~=1.5.2
