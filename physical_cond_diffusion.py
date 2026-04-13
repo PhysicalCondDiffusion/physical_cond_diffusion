@@ -479,47 +479,47 @@ if __name__ == '__main__':
 
     print("Data show End!")
 
-    # # ******Train model (disable during loading)
-    # noise_scheduler = DDPMScheduler(num_train_timesteps=1000, beta_schedule='squaredcos_cap_v2')
-    # loss_fn = nn.MSELoss()
-    # net = ClassConditionedUnet().to(device)
-    # opt = torch.optim.Adam(net.parameters(), lr=learn_rate)
-    # losses = []
-    # for epoch in range(n_epochs):
-    #     for _, x, y in tqdm(train_dataloader):
-    #         x = x.to(device) * 2 - 1
-    #         y = y.to(device)
-    #         noise = torch.randn_like(x)
-    #         T = noise_scheduler.num_train_timesteps
-    #         timesteps = torch.randint(0, T, (x.shape[0],), device=device, dtype=torch.long).long()
-    #         noisy_x = noise_scheduler.add_noise(x, noise, timesteps)
-    #
-    #         pred = net(noisy_x, timesteps, y)
-    #         loss = loss_fn(pred, noise)
-    #         opt.zero_grad()
-    #         loss.backward()
-    #         opt.step()
-    #
-    #         losses.append(loss.item())
-    #
-    #     avg_loss = sum(losses[-100:]) / 100
-    #     print(f'Finished epoch {epoch}. Average of the last 100 loss values: {avg_loss:05f}')
-    #     if avg_loss < 0.002:
-    #         break
-    # plt.plot(losses)
-    # # Save model (disable during loading)
-    # torch.save(net.state_dict(), model_name)
+    # ******Train model (disable during loading)
+    noise_scheduler = DDPMScheduler(num_train_timesteps=1000, beta_schedule='squaredcos_cap_v2')
+    loss_fn = nn.MSELoss()
+    net = ClassConditionedUnet().to(device)
+    opt = torch.optim.Adam(net.parameters(), lr=learn_rate)
+    losses = []
+    for epoch in range(n_epochs):
+        for _, x, y in tqdm(train_dataloader):
+            x = x.to(device) * 2 - 1
+            y = y.to(device)
+            noise = torch.randn_like(x)
+            T = noise_scheduler.num_train_timesteps
+            timesteps = torch.randint(0, T, (x.shape[0],), device=device, dtype=torch.long).long()
+            noisy_x = noise_scheduler.add_noise(x, noise, timesteps)
+
+            pred = net(noisy_x, timesteps, y)
+            loss = loss_fn(pred, noise)
+            opt.zero_grad()
+            loss.backward()
+            opt.step()
+
+            losses.append(loss.item())
+
+        avg_loss = sum(losses[-100:]) / 100
+        print(f'Finished epoch {epoch}. Average of the last 100 loss values: {avg_loss:05f}')
+        if avg_loss < 0.002:
+            break
+    plt.plot(losses)
+    # Save model (disable during loading)
+    torch.save(net.state_dict(), model_name)
 
     step_save_dir = "./generation_steps"
     os.makedirs(step_save_dir, exist_ok=True)
 
-    # ******Load model (disable during training)
-    noise_scheduler = DDPMScheduler(num_train_timesteps=1000, beta_schedule='squaredcos_cap_v2')
-    net = ClassConditionedUnet()
-    net.load_state_dict(torch.load(model_name))
-    net.to(device)
-    inference_steps = 50
-    noise_scheduler.set_timesteps(inference_steps)
+    # # ******Load model (disable during training)
+    # noise_scheduler = DDPMScheduler(num_train_timesteps=1000, beta_schedule='squaredcos_cap_v2')
+    # net = ClassConditionedUnet()
+    # net.load_state_dict(torch.load(model_name))
+    # net.to(device)
+    # inference_steps = 50
+    # noise_scheduler.set_timesteps(inference_steps)
 
     # # --- Evaluate model performance (may take time) ---
     # metrics = evaluate_comprehensive_metrics(net, test_dataloader, noise_scheduler, device)
